@@ -6,5 +6,6 @@ Todos estos proyectos estan hechos con este [kit](https://articulo.mercadolibre.
 ### Explicación de los proyectos 
 
 **Arduino/ todos los proyectos que se han implementado con arduino básicos**
+
 **ESP32/ todos los proyectos hechos en esp32 en unos casos con micropython**
 

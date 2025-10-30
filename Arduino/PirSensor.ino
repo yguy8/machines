@@ -1,5 +1,5 @@
 int pir = 2;
-int ledGreen = 3; 
+int ledVerde = 3; 
 int ledRojo = 4;
 int buzz = 5;
 int estado = 0;

@@ -20,6 +20,8 @@ void loop()
   lcd_1.setCursor(0, 1);
   
   lcd_1.autoscroll(); 
+  //scroll por dirección 
+  //scrollDisplayLeft y scrollDisplayRight
   // print the number of seconds since reset:
   lcd_1.print(seconds);
   delay(dt); // Wait for 1000 millisecond(s)

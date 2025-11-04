@@ -9,7 +9,7 @@ pinMode(ledPin, OUTPUT);
 pinMode(sensorPin, INPUT);
 pinMode(buzz, OUTPUT);
 Serial.begin(9600);
-for(int i = 0; i > 30; i++) //Utilizamos un for para calibrar el sensor 
+for(int i = 0; i < 30; i++) //Utilizamos un for para calibrar el sensor 
 {
 delay(1000);
 }

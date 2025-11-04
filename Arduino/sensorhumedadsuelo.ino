@@ -1,11 +1,11 @@
-int sensor;
+int SensorPin = A0;
 
-void setup() {
+void setup(){
   Serial.begin(9600);
 }
 
-void loop() {
-  //imprimir la humedad
-  sensor = analogRead(A0);
-  Serial.println(sensor);
+void loop(){
+  int humedad = analogRead(SensorPin);
+  Serial.println(humedad);
+  delay(1000);
 }

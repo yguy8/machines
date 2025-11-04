@@ -9,7 +9,7 @@ void setup()
   lcd_1.begin(16, 2); // Set up the number of columns and rows on the LCD.
 
   // Print a message to the LCD.
-  lcd_1.print("         Bienvenidos al serviocio  ");
+  lcd_1.print("         Bienvenidos al servicio  ");
   lcd_1.setCursor(1, 1);
   lcd_1.print("           abierto las 24/7  ");
 }

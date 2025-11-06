@@ -12,43 +12,48 @@ void setup() {
 }
 
 void loop() {
-  // Alarma que acelera: pip más rápido y LED parpadeando sincronizado
+  // Alarma que acelera: pip más rápido y colores cálidos sincronizados
   for (int i = 0; i < 20; i++) {
-    int delayTime = 500 - i * 20;           // Disminuye de 500 ms a 100 ms
+    int delayTime = 500 - i * 20;           // De 500 ms a 100 ms
     if (delayTime < 100) delayTime = 100;
 
-    int brightness = map(i, 0, 19, 50, 255); // Aumenta brillo de 50 a 255
+    int freq = 1000 + i * 50;               // Tono sube: 1000 → 2000 Hz
+    int colorIndex = i % 4;                 // 4 colores cálidos
 
-    // Encender buzzer y LED al mismo tiempo
-    tone(buzzer, 1000, 100);                
-    analogWrite(redPin, brightness);
-    analogWrite(greenPin, 0);
-    analogWrite(bluePin, 0);
+    tone(buzzer, freq, 100);                // Pip corto
+    setWarmColor(colorIndex);               // Color cálido sincronizado
 
-    delay(100); // Duración del pip y del destello
-
-    // Apagar buzzer y LED
+    delay(100);                             // Duración del pip y color
     noTone(buzzer);
-    analogWrite(redPin, 0);
-    analogWrite(greenPin, 0);
-    analogWrite(bluePin, 0);
+    setWarmColor(-1);                       // Apagar LED
 
-    delay(delayTime - 100); // Esperar hasta el siguiente pip
+    delay(delayTime - 100);                 // Espera hasta el siguiente pip
   }
 
-  // Explosión final: parpadeo blanco sincronizado con sonido
-  for (int j = 0; j < 5; j++) {
-    tone(buzzer, 3000, 100);
-    analogWrite(redPin, 255);
-    analogWrite(greenPin, 255);
-    analogWrite(bluePin, 255);
-    delay(100);
-    noTone(buzzer);
-    analogWrite(redPin, 0);
-    analogWrite(greenPin, 0);
-    analogWrite(bluePin, 0);
-    delay(100);
-  }
+  // Silencio tenso antes del pitido final
+  delay(1000);
 
-  delay(3000); // Espera antes de repetir
+  // Pitido final largo y destello blanco
+  tone(buzzer, 3500);                       // Pitido sostenido
+  analogWrite(redPin, 255);
+  analogWrite(greenPin, 255);
+  analogWrite(bluePin, 255);
+  delay(1500);
+  noTone(buzzer);
+  analogWrite(redPin, 0);
+  analogWrite(greenPin, 0);
+  analogWrite(bluePin, 0);
+
+  delay(5000); // Espera antes de repetir
+}
+
+// Función para colores cálidos sincronizados con el pip
+void setWarmColor(int index) {
+  switch (index) {
+    case 0: analogWrite(redPin, 255); analogWrite(greenPin, 50);  analogWrite(bluePin, 0);   break; // Rojo intenso
+    case 1: analogWrite(redPin, 255); analogWrite(greenPin, 150); analogWrite(bluePin, 0);   break; // Naranja
+    case 2: analogWrite(redPin, 255); analogWrite(greenPin, 255); analogWrite(bluePin, 0);   break; // Amarillo
+    case 3: analogWrite(redPin, 255); analogWrite(greenPin, 100); analogWrite(bluePin, 100); break; // Rosa cálido
+    default: analogWrite(redPin, 0);   analogWrite(greenPin, 0);   analogWrite(bluePin, 0);   break; // Apagar
+  }
 }

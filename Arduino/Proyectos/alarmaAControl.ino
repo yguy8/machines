@@ -7,8 +7,9 @@ const int BLUE_PIN = 11;
 const int BUZZER_PIN = 8;
 
 bool alarmaActiva = false;
-unsigned long lastBlink = 0;
-bool ledState = false;
+unsigned long tiempoAnterior = 0;
+const unsigned long intervalo = 400; // 200 encendido + 200 apagado
+bool estadoAlarma = false;
 
 void setup() {
   Serial.begin(9600);
@@ -22,14 +23,14 @@ void setup() {
 }
 
 void loop() {
-  // Detecta cualquier señal IR
+  // Detecta señal IR
   if (IrReceiver.decode()) {
     alarmaActiva = !alarmaActiva;
 
     if (alarmaActiva) {
-      Serial.println("🔔 Alarma ACTIVADA");
+      Serial.println("Alarma ACTIVADA");
     } else {
-      Serial.println("🔕 Alarma DESACTIVADA");
+      Serial.println("Alarma DESACTIVADA");
       apagarRGB();
       noTone(BUZZER_PIN);
     }
@@ -38,25 +39,27 @@ void loop() {
     delay(300); // Evita rebotes
   }
 
-  // Si la alarma está activa, parpadea en rojo y suena el buzzer
+  // Ejecuta la lógica de alarma sin bloquear
   if (alarmaActiva) {
-    tone(BUZZER_PIN, 1000); // Sonido constante
-    parpadeoRojo();
+    actualizarAlarma();
   }
 }
 
-void parpadeoRojo() {
-  unsigned long now = millis();
-  if (now - lastBlink > 300) {
-    ledState = !ledState;
-    if (ledState) {
+void actualizarAlarma() {
+  unsigned long ahora = millis();
+  if (ahora - tiempoAnterior >= intervalo) {
+    tiempoAnterior = ahora;
+    estadoAlarma = !estadoAlarma;
+
+    if (estadoAlarma) {
       analogWrite(RED_PIN, 255);
       analogWrite(GREEN_PIN, 0);
       analogWrite(BLUE_PIN, 0);
+      tone(BUZZER_PIN, 1000); // Beep agudo
     } else {
       apagarRGB();
+      noTone(BUZZER_PIN);
     }
-    lastBlink = now;
   }
 }
 

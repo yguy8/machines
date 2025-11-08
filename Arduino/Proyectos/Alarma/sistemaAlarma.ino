@@ -8,7 +8,7 @@ const int LASER_PIN = 7;
 const int LDR_PIN = A0;
 
 const String CONTRASENA = "rana123";
-const int UMBRAL_LUZ = 200; // Ajusta este valor según tus lecturas
+const int UMBRAL_LUZ = 200; // Ajusta este valor según tus lecturas [39 < x] cuando hay luz y [x > 200]     x = lectura
 
 bool sistemaActivo = false;
 bool intrusoDetectado = false;

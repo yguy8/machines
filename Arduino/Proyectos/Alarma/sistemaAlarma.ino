@@ -39,6 +39,7 @@ void loop() {
       activarSistema();
     } else if (intrusoDetectado) {
       desactivarSirena("Sirena desactivada por control remoto");
+      activarSistema();
       // El sistema sigue activo, no se apaga el láser
     }
     IrReceiver.resume();
@@ -76,6 +77,7 @@ void loop() {
       } else if (intrusoDetectado) {
         // Si hay sirena activa, se desactiva
         desactivarSirena("Sirena desactivada por contraseña");
+        activarSistema();
         // El sistema queda armado; láser permanece encendido
       } else {
         Serial.println("Sistema ya activo y sin sirena.");

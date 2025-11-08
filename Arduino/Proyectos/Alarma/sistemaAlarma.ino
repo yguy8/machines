@@ -49,8 +49,8 @@ void loop() {
   // Verifica si el haz láser fue interrumpido (solo si está activo y sin intruso)
   if (sistemaActivo && !intrusoDetectado) {
     int luz = analogRead(LDR_PIN);
-    Serial.print("LDR: ");
-    Serial.println(luz);
+   // Serial.print("LDR: ");
+    //Serial.println(luz);
 
     // Con láser directo esperas bajo (≈25); intrusión cuando sube por encima del umbral
     if (luz > UMBRAL_LUZ) {
@@ -129,9 +129,11 @@ void actualizarSirena() {
     if (estado % 2 == 0) {
       tone(BUZZER_PIN, 900);          // tono agudo
       digitalWrite(RED_LED, HIGH);     // LED rojo encendido
+    digitalWrite(LASER_PIN, LOW);     // Láser encendido
     } else {
       tone(BUZZER_PIN, 2500);          // tono aún más agudo
       digitalWrite(RED_LED, LOW);      // LED rojo apagado
+      digitalWrite(LASER_PIN, HIGH);       // Láser apagado
     }
 
     if (estado >= 6) estado = 0; // reinicia ciclo cada 6 pasos

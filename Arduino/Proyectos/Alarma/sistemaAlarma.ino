@@ -78,23 +78,19 @@ void loop() {
 
 void actualizarSirena() {
   unsigned long ahora = millis();
-  if (ahora - tiempoAnterior >= intervalo) {
+  if (ahora - tiempoAnterior >= 300) {
     tiempoAnterior = ahora;
 
-    frecuencia += direccion * 50;
-    if (frecuencia >= 2500 || frecuencia <= 1000) {
-      direccion *= -1;
-    }
+    static bool tonoAlto = false;
+    tonoAlto = !tonoAlto;
 
+    int frecuencia = tonoAlto ? 2000 : 1000;
     tone(BUZZER_PIN, frecuencia);
 
-    if (direccion > 0) {
-      digitalWrite(RED_LED, HIGH);
-    } else {
-      digitalWrite(RED_LED, LOW);
-    }
+    digitalWrite(RED_LED, tonoAlto ? HIGH : LOW);
   }
 }
+
 
 void desactivarSirena(String mensaje) {
   intrusoDetectado = false;

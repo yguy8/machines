@@ -117,17 +117,22 @@ void activarAlarmaAviso() {
 }
 
 void actualizarSirena() {
+  static int estado = 0;
   unsigned long ahora = millis();
-  if (ahora - tiempoAnterior >= 300) {
+
+  if (ahora - tiempoAnterior >= 150) { // velocidad del ciclo
     tiempoAnterior = ahora;
+    estado++;
 
-    static bool tonoAlto = false;
-    tonoAlto = !tonoAlto;
+    if (estado % 2 == 0) {
+      tone(BUZZER_PIN, 900);          // tono agudo
+      digitalWrite(RED_LED, HIGH);     // LED rojo encendido
+    } else {
+      tone(BUZZER_PIN, 2500);          // tono aún más agudo
+      digitalWrite(RED_LED, LOW);      // LED rojo apagado
+    }
 
-    int frecuencia = tonoAlto ? 500 : 100; // Alterna tonos
-    tone(BUZZER_PIN, frecuencia);
-
-    digitalWrite(RED_LED, tonoAlto ? HIGH : LOW);
+    if (estado >= 6) estado = 0; // reinicia ciclo cada 6 pasos
   }
 }
 

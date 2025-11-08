@@ -25,7 +25,7 @@ void loop() {
 // Función que genera el efecto de sirena mientras haya vibración
 void sirena() {
   // Subida de frecuencia
-  for (int freq = 200; freq <= 1000; freq += 50) {
+  for (int freq = 500; freq <= 1000; freq += 50) {
     tone(buzz, freq);
     digitalWrite(ledPin, HIGH);
     delay(30);

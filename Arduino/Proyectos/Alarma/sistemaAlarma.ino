@@ -109,12 +109,12 @@ void activarSistema() {
 
 void activarAlarmaAviso() {
   for (int i = 0; i < 3; i++) {
-    tone(BUZZER_PIN, 1500);          // Pitido
-    digitalWrite(BLUE_LED, HIGH);    // LED azul encendido
-    delay(200);                      // Duración
+    tone(BUZZER_PIN, 1800, 60);       // Pitido corto y seco
+    digitalWrite(BLUE_LED, HIGH);     // LED azul encendido
+    delay(60);                        // Duración del pip
     noTone(BUZZER_PIN);
-    digitalWrite(BLUE_LED, LOW);     // LED azul apagado
-    delay(200);                      // Pausa entre pitidos
+    digitalWrite(BLUE_LED, LOW);      // LED azul apagado
+    delay(200);                       // Pausa entre pitidos
   }
 }
 

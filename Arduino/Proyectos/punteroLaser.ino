@@ -29,8 +29,8 @@ void loop() {
   int val2 = analogRead(pot2);
 
   // Mapear valores a ángulos de servo
-  int angle1 = map(val1, 0, 1023, 0, 180);
-  int angle2 = map(val2, 0, 1023, 0, 180);
+  int angle1 = map(val1, 0, 1023, 0, 170);
+  int angle2 = map(val2, 0, 1023, 0, 170);
 
   // Mover servos
   servo1.write(angle1);

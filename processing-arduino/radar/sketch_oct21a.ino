@@ -1,6 +1,6 @@
 // Incluye la librería Servo
 
-#include <Servo.h>. 
+#include <Servo.h>
 
 // Defines Tirg y Echo del Ultrasonic Sensor
 

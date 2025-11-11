@@ -127,13 +127,13 @@ void actualizarSirena() {
     estado++;
 
     if (estado % 2 == 0) {
-      tone(BUZZER_PIN, 900);          // tono agudo
-      digitalWrite(RED_LED, HIGH);     // LED rojo encendido
-    digitalWrite(LASER_PIN, LOW);     // Láser encendido
+      tone(BUZZER_PIN, 1800, 60);       // Pulso corto
+      digitalWrite(RED_LED, HIGH);      // LED rojo encendido
+      digitalWrite(LASER_PIN, LOW);     // Láser apagado
     } else {
-      tone(BUZZER_PIN, 2500);          // tono aún más agudo
-      digitalWrite(RED_LED, LOW);      // LED rojo apagado
-      digitalWrite(LASER_PIN, HIGH);       // Láser apagado
+      tone(BUZZER_PIN, 2200, 60);       // Pulso más agudo
+      digitalWrite(RED_LED, LOW);       // LED rojo apagado
+      digitalWrite(LASER_PIN, HIGH);    // Láser encendido
     }
 
     if (estado >= 6) estado = 0; // reinicia ciclo cada 6 pasos

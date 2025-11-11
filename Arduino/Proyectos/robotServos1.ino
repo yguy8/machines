@@ -3,19 +3,23 @@
 Servo servoX;
 Servo servoY;
 
-const int pinJoyX = A0;
-const int pinJoyY = A1;
-const int pinJoyButton = 2;
+const int pinJoyX = A0;       // Joystick eje X
+const int pinJoyY = A1;       // Joystick eje Y
+const int pinJoyButton = 2;   // Botón del joystick
 
-const int pinLed = 8;
-const int pinBuzzer = 9;
+const int pinLedAzul = 7;     // LED azul (movimiento en X)
+const int pinLedVerde = 6;    // LED verde (movimiento en Y)
+const int pinLedAmarillo = 8; // LED amarillo (disparo)
+const int pinBuzzer = 9;      // Buzzer
 
 void setup() {
   servoX.attach(3);   // Servo X en pin 3
   servoY.attach(5);   // Servo Y en pin 5
 
   pinMode(pinJoyButton, INPUT_PULLUP); 
-  pinMode(pinLed, OUTPUT);
+  pinMode(pinLedAzul, OUTPUT);
+  pinMode(pinLedVerde, OUTPUT);
+  pinMode(pinLedAmarillo, OUTPUT);
   pinMode(pinBuzzer, OUTPUT);
 
   // Posición inicial
@@ -36,30 +40,40 @@ void loop() {
   servoX.write(angX);
   servoY.write(angY);
 
-  // Si se presiona el pulsador → ejecutar patrón rápido
-  if (digitalRead(pinJoyButton) == LOW) {
-    ejecutarPatronRapido();
+  // Detectar movimiento en X (fuera del centro ±50)
+  if (valX > 562 || valX < 462) {
+    digitalWrite(pinLedAzul, HIGH);
+  } else {
+    digitalWrite(pinLedAzul, LOW);
   }
+
+  // Detectar movimiento en Y (fuera del centro ±50)
+  if (valY > 562 || valY < 462) {
+    digitalWrite(pinLedVerde, HIGH);
+  } else {
+    digitalWrite(pinLedVerde, LOW);
+  }
+
+  // Si se presiona el pulsador → disparo sutil
+  if (digitalRead(pinJoyButton) == LOW) {
+    disparoSutil();
+  }
+
+  delay(15);
 }
 
 // ----------------------
-// Función para patrón rápido de sonido + LED
+// Función para disparo sutil (buzzer + LED amarillo)
 // ----------------------
-void ejecutarPatronRapido() {
-  for (int i = 0; i < 20; i++) {
-    int delayTime = 250 - i * 10;   // De 250 ms a 50 ms
-    if (delayTime < 50) delayTime = 50;
+void disparoSutil() {
+  int freq = 1800;          // Frecuencia media-alta (sonido seco)
+  int duracion = 60;        // Duración corta (60 ms)
 
-    int freq = 1200 + i * 80;       // Tono sube rápido: 1200 → 2800 Hz
+  tone(pinBuzzer, freq, duracion);   // Sonido breve
+  digitalWrite(pinLedAmarillo, HIGH); // LED amarillo encendido
 
-    // Encender LED + tono
-    tone(pinBuzzer, freq, 50);      // Pip corto (50 ms)
-    digitalWrite(pinLed, HIGH);
+  delay(duracion);           // Esperar duración del disparo
 
-    delay(50);                      // Duración pip + LED
-    noTone(pinBuzzer);
-    digitalWrite(pinLed, LOW);
-
-    delay(delayTime - 50);          // Pausa antes del siguiente pip
-  }
+  noTone(pinBuzzer);
+  digitalWrite(pinLedAmarillo, LOW);  // Apagar LED
 }

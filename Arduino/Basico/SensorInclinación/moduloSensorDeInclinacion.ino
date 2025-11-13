@@ -1,3 +1,4 @@
+//modulo sensor de inclinación sw-520
 const int sensor = 2;
 const int ledPin = 13;
 const int buzzer = 10;

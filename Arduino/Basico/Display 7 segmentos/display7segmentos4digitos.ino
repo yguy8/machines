@@ -1,29 +1,34 @@
+//cuenta progresiva del 0-9999
 #include "SevSeg.h"
 SevSeg sevseg;
-
+// es de ánodo común el que estoy usando 
 // Variables globales
-int Contador = 0;     // inicio
-int espera =0;        // contador espera
-int esperamax =1000;  // define la velocidad
+int Contador = 0;     
+unsigned long tiempoAnterior = 0; 
+const unsigned long intervalo = 100; // 1 segundo
 
-void setup(){
+void setup() {
   byte numDigits = 4;
   byte digitPins[] = {10, 11, 12, 13};
   byte segmentPins[] = {9, 2, 3, 5, 6, 8, 7, 4};
 
   bool resistorsOnSegments = true; 
   bool updateWithDelaysIn = true;
-  byte hardwareConfig = COMMON_CATHODE; 
+  byte hardwareConfig = COMMON_ANODE; 
+
   sevseg.begin(hardwareConfig, numDigits, digitPins, segmentPins, resistorsOnSegments);
-  sevseg.setBrightness(90);
+  sevseg.setBrightness(50); // brillo más bajo para distinguir mejor
 }
-void loop(){
+
+void loop() {
   sevseg.refreshDisplay();
-  sevseg.setNumber(Contador, -1);
-  // sistema para aumentar el contador y crear un sistema de velocidad
-  espera = espera +1;
-  if (espera == esperamax){
-    espera =0;
-    Contador = Contador + 1;
+  sevseg.setNumber(Contador);
+
+  // sistema de conteo cada segundo
+  unsigned long tiempoActual = millis();
+  if (tiempoActual - tiempoAnterior >= intervalo) {
+    tiempoAnterior = tiempoActual;
+    Contador++;
   }
 }
+

@@ -40,7 +40,7 @@ void loop() {
   if (tiempoActual - tiempoAnterior >= intervalo) {
     tiempoAnterior = tiempoActual;
     if (Contador > 0) {
-      Contador--; // cuenta regresiva
+      Contador--; // cuenta regresiva cambiar a ++ para progresiva
 
       // Pitido corto cada segundo
       tone(buzzerPin, 1700, 100); 

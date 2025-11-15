@@ -1,4 +1,7 @@
 //display de 7 segmentos y 4 digitos
+//pines de conexión
+// arriba 10, 9, 8, 11, 12, 2
+//abajo 6, 5, 4, 3, 7, 13
 #include "SevSeg.h"
 SevSeg sevseg;
 

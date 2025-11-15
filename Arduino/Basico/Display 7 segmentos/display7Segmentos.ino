@@ -1,3 +1,6 @@
+//pines de arriba  de izquierda a derecha 8, 7, GND, 6, 5
+//pines de abajo de izquierda a derecha 4, 3, GND, 2, 9
+
 #include "SevSeg.h"
 SevSeg sevseg; 
 

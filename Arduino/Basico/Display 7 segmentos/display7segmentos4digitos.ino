@@ -2,6 +2,9 @@
 #include "SevSeg.h"
 SevSeg sevseg;
 // es de ánodo común el que estoy usando 
+//pines de conexión
+// arriba 10, 9, 8, 11, 12, 2
+//abajo 6, 5, 4, 3, 7, 13
 // Variables globales
 int Contador = 0;     
 unsigned long tiempoAnterior = 0; 

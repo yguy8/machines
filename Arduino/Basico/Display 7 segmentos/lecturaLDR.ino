@@ -24,7 +24,7 @@ void loop() {
   sevseg.refreshDisplay();
 
   // Leer valor de la LDR
-  int valorLuz = analogRead(ldrPin); // 0-1023
+  int valorLuz = analogRead(ldrPin); // 0-1023             entre más cerca del 0 es hay más luz
 
   // Mostrar el valor en el display
   sevseg.setNumber(valorLuz);

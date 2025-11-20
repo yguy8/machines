@@ -10,7 +10,7 @@ const int POT_PIN = A0;
 
 // Ángulos
 const int ANG_MIN = 0;
-const int ANG_MAX = 180;
+const int ANG_MAX = 170;
 
 Servo s1, s2, s3;
 

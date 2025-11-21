@@ -3,20 +3,20 @@ import processing.serial.*;
 Serial puerto;
 
 void setup() {
-  size(600, 200);
+  size(630, 250);
   // Ajusta el nombre del puerto según tu PC
   puerto = new Serial(this, "COM6", 9600);
 }
 
 void draw() {
-  background(200);
+  background(0);
 
   // Dibujar cuadros
-  fill(255, 0, 0);   rect(20, 50, 100, 100);   // Rojo
-  fill(0, 255, 0);   rect(140, 50, 100, 100);  // Verde
-  fill(0, 0, 255);   rect(260, 50, 100, 100);  // Azul
-  fill(255, 255, 0); rect(380, 50, 100, 100);  // Amarillo
   fill(255);         rect(500, 50, 100, 100);  // Blanco
+  fill(255, 255, 0); rect(380, 50, 100, 100);  // Amarillo
+  fill(0, 0, 255);   rect(260, 50, 100, 100);  // Azul
+  fill(0, 255, 0);   rect(140, 50, 100, 100);  // Verde
+  fill(255, 0, 0);   rect(20, 50, 100, 100);   // Rojo
 }
 
 void mousePressed() {
@@ -37,3 +37,4 @@ void mousePressed() {
     puerto.write('W'); // Blanco
   }
 }
+

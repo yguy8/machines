@@ -4,7 +4,9 @@ Serial puerto;
 
 void setup() {
   size(630, 250);
-  // Ajusta el nombre del puerto según tu PC
+  surface.setResizable(true); // permitir agrandar ventana
+  puerto = new Serial(this, "COM6", 9600);
+  // Ajusta el nombre del puerto en mi caso COM6
   puerto = new Serial(this, "COM6", 9600);
 }
 
